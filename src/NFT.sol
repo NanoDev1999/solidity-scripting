@@ -4,6 +4,7 @@ pragma solidity ^0.8.19;
 import "solmate/tokens/ERC721.sol";
 import "openzeppelin-contracts/contracts/utils/Strings.sol";
 import "openzeppelin-contracts/contracts/access/Ownable.sol";
+import "openzeppelin-contracts/contracts/utils/Context.sol";
 
 error MintPriceNotPaid();
 error MaxSupply();
@@ -21,9 +22,8 @@ contract NFT is ERC721, Ownable {
     constructor(
         string memory _name,
         string memory _symbol,
-        string memory _baseURI,
-        address initialOwner
-    ) Ownable(initialOwner) ERC721(_name, _symbol) {
+        string memory _baseURI
+    ) Ownable(_msgSender()) ERC721(_name, _symbol) {
         baseURI = _baseURI;
     }
 
